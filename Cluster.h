@@ -26,7 +26,9 @@ namespace Clustering {
 
         //Big 3: Copy, Overloaded operator=, Destructor
         Cluster(const Cluster &);
+        Cluster &operator=(const Cluster &);
 
     };
 }
-#endif //PA1_CLUSTER_H
+#endif //PA2_CLUSTER_H
+
