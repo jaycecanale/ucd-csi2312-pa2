@@ -2,8 +2,8 @@
 // Created by Jayce on 9/14/2015.
 //
 
-#ifndef PA1_CLUSTER_H
-#define PA1_CLUSTER_H
+#ifndef PA2_CLUSTER_H
+#define PA2_CLUSTER_H
 
 #include "Point.h"
 
