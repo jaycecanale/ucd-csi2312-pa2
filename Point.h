@@ -6,8 +6,8 @@
 using namespace std;
 
 
-#ifndef __point_h
-#define __point_h
+#ifndef PA2_Point_H
+#define PA2_Point_H
 
     class Point {
 
