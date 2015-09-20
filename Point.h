@@ -25,14 +25,31 @@ public:
 
   //Accessors and Mutators
   int getDim() const;
-  double getArray(int) const;
-  void setArray();
+  double getValue(int) const;
+  void setValue(int, double);
 
   //Functions
   double distanceTo(const Point&) const;
-
   void setDim(int newDim);
 
+  //Overloaded Operators
+
+  //Members
+  Point &operator*=(double);
+
+  //Friends
+  friend Point &operator+=(Point &, const Point &);
+  friend Point &operator-=(Point &, const Point &);
+  friend const Point operator+(const Point&, const Point&); //Adds two point's dimensions together
+  friend const Point operator-(const Point&, const Point&); //Subtracts two point's dimensions from each other
+
+  friend bool operator==(const Point &, const Point &);
+  friend bool operator!=(const Point &, const Point &);
+
+  friend bool operator<(const Point &, const Point &);
+  friend bool operator>(const Point &, const Point &);
+  friend bool operator<=(const Point &, const Point &);
+  friend bool operator>=(const Point &, const Point &);
 };
 
 #endif // __point_h

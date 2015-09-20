@@ -9,25 +9,47 @@ double computeArea(Point &p1, Point &p2, Point &p3);
 int main(void) {
 
     int inputDim;
+    double inputVal;
 
     cout << "Please enter the number of dimensions" << endl;
     cin >> inputDim;
 
     Point p1(inputDim);
-    Point p2(p1);
+    Point p2(inputDim);
 
-    cout << "There are " << p1.getDim() << " dimensions in point 1" << endl;
-    cout << "There are " << p2.getDim() << " dimensions in point 2" << endl;
+    cout << "Enter the values for Point 1" << endl;
 
-    p1.setArray();
-    p2.setArray();
+    for (int i = 0; i < p1.getDim(); i++) {
+        cin >> inputVal;
+        p1.setValue(i, inputVal);
+    }
 
-    cout << "The distance between p1 and p2 is " << p1.distanceTo(p2);
+    cout << "Enter the values for Point 2" << endl;
 
-    //delete [] p1.array;
-    //delete [] p2.array;
+    for (int i = 0; i < p2.getDim(); i++) {
+        cin >> inputVal;
+        p2.setValue(i, inputVal);
+    }
+
+    cout << endl;
+
+    if (p1 < p2) {
+        cout << "p1 is less than p2" << endl;
+    }
+    else
+        cout << "p1 is greater than p2" << endl;
+
+
+    cout << "The values for Point 1 are " ;
+
+    for(int i = 0; i < p1.getDim(); i++){
+        cout << p1.getValue(i) << " " ;
+    }
+
+    cout << endl;
+
     p1.Point::~Point();
-    p2.Point::~Point();
+
 
     return 0;
 }
