@@ -6,15 +6,6 @@ Point::Point(int initDim) {
   array = new double[dim]();
 }
 
-/*Point::Point(int initDim) {
-  dim = initDim;
-}
-
-Point::Point(int initDim, double *initArray) {
-  dim = initDim;
-  array = new double[dim]();
-}*/
-
 //Copy Constructor
 Point::Point(const Point &point) {
   dim = point.dim;
@@ -84,18 +75,10 @@ double Point::distanceTo(const Point &point) const {
 
 //Members
 
-Point &Point::operator*=(double num) {
-  for(int i = 0; i < dim; i++) {
-    Point.array[i] *= num;
-  }
-  return <#initializer#>;
-}
-
 //Friends
 
 // Adds one point's dimensions to a particular point
 Point &operator+=(Point &point, const Point &point1) {
-
   for (int i = 0; i < point.dim; i++) {
     point.array[i] += point1.array[i];
   }
@@ -112,7 +95,7 @@ Point &operator-=(Point &point, const Point &point1) {
 }
 
 //Adds two points dimensions together
-const Point operator+(const Point &point, const Point &point1) {
+Point operator+(const Point &point, const Point &point1) {
 
   Point sum(point.dim);
 
@@ -219,5 +202,6 @@ bool operator>=(const Point &point, const Point &point1) {
   }
   return greaterOrEqual;
 }
+
 
 

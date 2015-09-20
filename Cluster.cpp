@@ -3,3 +3,7 @@
 //
 
 #include "Cluster.h"
+
+Clustering::Cluster::Cluster(const Clustering::Cluster &cluster) {
+
+}

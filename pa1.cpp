@@ -4,6 +4,8 @@
 
 #include "Point.h"
 
+using namespace Clustering;
+
 double computeArea(Point &p1, Point &p2, Point &p3);
 
 int main(void) {
