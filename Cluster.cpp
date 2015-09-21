@@ -18,8 +18,8 @@ Clustering::Cluster &Clustering::Cluster::operator=(const Clustering::Cluster &c
 }
 
 void Clustering::Cluster::add(Clustering::PointPtr const &ptr) {
-    PointPtr p;
-    p = ptr;
+
+    Point newOne = new Point(&ptr);
 
 }
 
@@ -36,3 +36,6 @@ chant [7:01 PM]7:01
 and make the last `Lnode` in the `Cluster` link to the new
  `Lnode` so that it becomes a member of the list.*/
 
+Clustering::Cluster::~Cluster() {
+
+}

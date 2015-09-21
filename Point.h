@@ -1,67 +1,66 @@
 // A 3-dimensional point class!
 // Coordinates are double-precision floating point.
+#ifndef PA2_Point_H
+#define PA2_Point_H
+
 #include <iostream>
 #include <iomanip>
 #include <cmath>
 
-using namespace std;
+namespace Clustering {
+
+    class Point {
+
+    private:
+        int dim;
+        double *array;
+
+    public:
+        Point(int);
+
+        //Copy Constructor, Overloaded operator=, Destructor
+        Point(const Point &point);
+
+        Point &operator=(const Point &);
+
+        ~Point();
+
+        //Accessors and Mutators
+        int getDim() const;
+
+        double getValue(int) const;
+
+        void setValue(int, double);
+
+        //Functions
+        double distanceTo(const Point &) const;
+
+        void setDim(int newDim);
+
+        //Overloaded Operators
+
+        //Members
 
 
-#ifndef PA2_Point_H
-#define PA2_Point_H
+        //Friends
+        friend Point &operator+=(Point &, const Point &);
 
-class Point {
+        friend Point &operator-=(Point &, const Point &);
 
-private:
-    int dim;
-    double *array;
+        friend Point operator+(const Point &, const Point &); //Adds two point's dimensions together
+        friend const Point operator-(const Point &, const Point &); //Subtracts two point's dimensions from each other
 
-public:
-    Point(int);
+        friend bool operator==(const Point &, const Point &);
 
-    //Copy Constructor, Overloaded operator=, Destructor
-    Point(const Point &point);
+        friend bool operator!=(const Point &, const Point &);
 
-    Point &operator=(const Point &);
+        friend bool operator<(const Point &, const Point &);
 
-    ~Point();
+        friend bool operator>(const Point &, const Point &);
 
-    //Accessors and Mutators
-    int getDim() const;
+        friend bool operator<=(const Point &, const Point &);
 
-    double getValue(int) const;
-
-    void setValue(int, double);
-
-    //Functions
-    double distanceTo(const Point &) const;
-
-    void setDim(int newDim);
-
-    //Overloaded Operators
-
-    //Members
-
-
-    //Friends
-    friend Point &operator+=(Point &, const Point &);
-
-    friend Point &operator-=(Point &, const Point &);
-
-    friend Point operator+(const Point &, const Point &); //Adds two point's dimensions together
-    friend const Point operator-(const Point &, const Point &); //Subtracts two point's dimensions from each other
-
-    friend bool operator==(const Point &, const Point &);
-
-    friend bool operator!=(const Point &, const Point &);
-
-    friend bool operator<(const Point &, const Point &);
-
-    friend bool operator>(const Point &, const Point &);
-
-    friend bool operator<=(const Point &, const Point &);
-
-    friend bool operator>=(const Point &, const Point &);
-};
-
+        friend bool operator>=(const Point &, const Point &);
+    };
+}
 #endif // __point_h

@@ -7,7 +7,6 @@
 
 #include "Point.h"
 
-using namespace std;
 namespace Clustering {
 
     typedef Point *PointPtr;
