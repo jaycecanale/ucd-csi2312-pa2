@@ -19,6 +19,7 @@ int main(void) {
     Point p1(inputDim);
     Point p2(inputDim);
     Point p3(inputDim);
+    Cluster(p1);
 
     cout << "Enter the values for Point 1" << endl;
 

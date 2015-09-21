@@ -1,4 +1,4 @@
-#include <array>
+//#include <array>
 #include "Point.h"
 
 Point::Point(int initDim) {
