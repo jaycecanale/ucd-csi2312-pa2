@@ -40,27 +40,29 @@ namespace Clustering {
         //Overloaded Operators
 
         //Members
+        Point &operator*=(double); // Multiply a Point by a given number
 
+        Point &operator/=(double); // Divide a Point by a given number
 
         //Friends
-        friend Point &operator+=(Point &, const Point &);
+        friend Point &operator+=(Point &, const Point &); //Compounded addition operator
 
-        friend Point &operator-=(Point &, const Point &);
+        friend Point &operator-=(Point &, const Point &); //Compounded subtraction operator
 
         friend Point operator+(const Point &, const Point &); //Adds two point's dimensions together
         friend const Point operator-(const Point &, const Point &); //Subtracts two point's dimensions from each other
 
-        friend bool operator==(const Point &, const Point &);
+        friend bool operator==(const Point &, const Point &); //Equivalent operator
 
-        friend bool operator!=(const Point &, const Point &);
+        friend bool operator!=(const Point &, const Point &); //Nonequivalent operator
 
-        friend bool operator<(const Point &, const Point &);
+        friend bool operator<(const Point &, const Point &); //Less than operator
 
-        friend bool operator>(const Point &, const Point &);
+        friend bool operator>(const Point &, const Point &); //Greater than operator
 
-        friend bool operator<=(const Point &, const Point &);
+        friend bool operator<=(const Point &, const Point &); //Less than or equal to
 
-        friend bool operator>=(const Point &, const Point &);
+        friend bool operator>=(const Point &, const Point &); //Greator than or equal to
     };
 }
 #endif // __point_h

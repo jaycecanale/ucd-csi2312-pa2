@@ -20,11 +20,10 @@ namespace Clustering {
         }
         return *this;
     }
+}
 
     //Destructor
-    Clustering::Cluster::~Cluster() {
 
-    }
 
     void Clustering::Cluster::add(PointPtr const &ptr) {
         LNodePtr newNode = new LNode;
@@ -34,10 +33,7 @@ namespace Clustering {
     }
 
 
-    const PointPtr &Cluster::remove(PointPtr const &ptr) {
-        
-    }
-}
+
 
 
 

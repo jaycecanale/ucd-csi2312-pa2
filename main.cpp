@@ -19,6 +19,7 @@ using namespace Clustering;
         Point p1(inputDim);
         Point p2(inputDim);
         Point p3(inputDim);
+        Point p4(inputDim);
         //Cluster(p1);
 
         std::cout << "Enter the values for Point 1" << std::endl;
@@ -33,6 +34,13 @@ using namespace Clustering;
         for (int i = 0; i < p2.getDim(); i++) {
             std::cin >> inputVal;
             p2.setValue(i, inputVal);
+        }
+
+        std::cout << "Enter the values for Point 4" << std::endl;
+
+        for (int i = 0; i < p4.getDim(); i++) {
+            std::cin >> inputVal;
+            p4.setValue(i, inputVal);
         }
 
         std::cout << std::endl;
@@ -53,6 +61,12 @@ using namespace Clustering;
         }
 
         std::cout << std::endl;
+
+        p4 /= 0;
+
+        for (int i = 0; i < inputDim; i++){
+            std::cout << p4.getValue(i) << " " ;
+        }
 
         p1.Point::~Point();
 

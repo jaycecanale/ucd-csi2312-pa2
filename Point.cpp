@@ -74,6 +74,25 @@ namespace Clustering {
     }
 
 //Members
+    //Multiply a Point by a given number
+    Point &Point::operator*=(double num) {
+        for (int i = 0; i < dim; i++) {
+            array[i] *= num;
+        }
+    }
+
+    //Divide a Point by a given number
+    Point &Point::operator/=(double num) {
+        if (num == 0) {
+            std::cout << "Not divisable by zero" << std::endl;
+        }
+        else {
+        for (int i = 0; i < dim; i++) {
+            array[i] /= num;
+        }
+        }
+    }
+
 
 //Friends
 
@@ -178,6 +197,7 @@ namespace Clustering {
         return greaterThan;
     }
 
+    //Determines if a point is less than or equal to a point
     bool operator<=(const Clustering::Point &point, const Clustering::Point &point1) {
         bool lessOrEqual = true;
 
@@ -190,7 +210,7 @@ namespace Clustering {
         return lessOrEqual;
     }
 
-
+    //Determines whether a point if greater than or equal to a point
     bool operator>=(const Clustering::Point &point, const Point &point1) {
         bool greaterOrEqual = true;
 
@@ -202,6 +222,9 @@ namespace Clustering {
         }
         return greaterOrEqual;
     }
+
+
+
 }
 
 
