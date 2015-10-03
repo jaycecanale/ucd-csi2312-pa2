@@ -44,6 +44,8 @@ namespace Clustering {
 
         Point &operator/=(double); // Divide a Point by a given number
 
+
+
         //Friends
         friend Point &operator+=(Point &, const Point &); //Compounded addition operator
 
@@ -62,7 +64,7 @@ namespace Clustering {
 
         friend bool operator<=(const Point &, const Point &); //Less than or equal to
 
-        friend bool operator>=(const Point &, const Point &); //Greator than or equal to
+        friend bool operator>=(const Point &, const Point &); //Greater than or equal to
     };
 }
 #endif // __point_h
