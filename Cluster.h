@@ -36,7 +36,7 @@ namespace Clustering {
         // Overloaded operators
 
         // IO
-        friend std::ostream &operator<<(std::ostream &, const Cluster &);
+        friend std::ostream &operator<<(std::ostream &, const Cluster &); //Output the Points in a Cluster
         friend std::istream &operator>>(std::istream &, Cluster &);
 
         // Set-preserving operators (do not duplicate points in the space)
