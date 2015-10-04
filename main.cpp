@@ -3,97 +3,80 @@
 // PA 2
 
 #include "Point.h"
+#include "Cluster.h"
 
 using namespace Clustering;
 
-    double computeArea(Point &p1, Point &p2, Point &p3);
+//double computeArea(Point &p1, Point &p2, Point &p3);
 
-    int main(void) {
+int main(void) {
 
-        int inputDim;
-        double inputVal;
+    //Point p1(3);
+    //p1.setValue(0, 4);
 
-        std::cout << "Please enter the number of dimensions" << std::endl;
-        std::cin >> inputDim;
+    PointPtr p1 = new Point(3);
+    p1->setValue(0, 4);
+    p1->setValue(1, 5);
+    p1->setValue(2, 6);
 
-        Point p1(inputDim);
-        Point p2(inputDim);
-        Point p3(inputDim);
-        Point p4(inputDim);
-        //Cluster(p1);
+    PointPtr p2 = new Point(3);
+    p2->setValue(0, 7);
+    p2->setValue(1, 8);
+    p2->setValue(2, 9);
 
-        std::cout << "Enter the values for Point 1" << std::endl;
+    PointPtr p3 = new Point(3);
 
-        for (int i = 0; i < p1.getDim(); i++) {
-            std::cin >> inputVal;
-            p1.setValue(i, inputVal);
-        }
+    std::cout << "P1 has " << p1->getDim() << " Dimensions " << std::endl;
 
-        std::cout << "Enter the values for Point 2" << std::endl;
+//    std::cout << "The values of P1 are " ;
+//    for (int i = 0; i < p1->getDim(); i++){
+//        std::cout << p1->getValue(i) << " " ;
+//    }
 
-        for (int i = 0; i < p2.getDim(); i++) {
-            std::cin >> inputVal;
-            p2.setValue(i, inputVal);
-        }
+    //std::cout << std::endl;
 
-        std::cout << "Enter the values for Point 4" << std::endl;
+    *p3 = *p1 + *p2;
 
-        for (int i = 0; i < p4.getDim(); i++) {
-            std::cin >> inputVal;
-            p4.setValue(i, inputVal);
-        }
+//    for (int i = 0; i < p3->getDim(); i++) {
+//        std::cout << p3->getValue(i) << " " ;
+//    }
 
-        std::cout << std::endl;
+    std::cout << *p1;
+    std::cout << *p3;
 
-        if (p1 < p2) {
-            std::cout << "p1 is less than p2" << std::endl;
-        }
-        else
-            std::cout << "p1 is greater than p2" << std::endl;
+    Cluster c1;
 
+    c1.add(p1);
+    c1.add(p2);
+//    c1.add(p3);
+//    c1.remove(p1);
 
-        std::cout << "The values for Point 1 are ";
+    std::cout << c1;
 
-        p3 = p1 + p2;
+    return 0;
+}
 
-        for (int i = 0; i < p1.getDim(); i++) {
-            std::cout << p3.getValue(i) << " " ;
-        }
-
-        std::cout << std::endl;
-
-        p4 /= 0;
-
-        for (int i = 0; i < inputDim; i++){
-            std::cout << p4.getValue(i) << " " ;
-        }
-
-        p1.Point::~Point();
-
-
-        return 0;
-    }
 
 //************************************************
 // Function Definitions
 
 //Computes the area of the object
 
-    double computeArea(Point &p1, Point &p2, Point &p3) {
+/*double computeArea(Point &p1, Point &p2, Point &p3) {
 
-        double area = 0;
-        double sideA = 0;
-        double sideB = 0;
-        double sideC = 0;
-        double s = 0;
+    double area = 0;
+    double sideA = 0;
+    double sideB = 0;
+    double sideC = 0;
+    double s = 0;
 
-        sideA = p1.distanceTo(p2);
-        sideB = p2.distanceTo(p3);
-        sideC = p3.distanceTo(p1);
+    sideA = p1.distanceTo(p2);
+    sideB = p2.distanceTo(p3);
+    sideC = p3.distanceTo(p1);
 
-        s = (sideA + sideB + sideC) / 2;
+    s = (sideA + sideB + sideC) / 2;
 
-        area = sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
+    area = sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
 
-        return area;
-    }
+    return area;
+}*/
