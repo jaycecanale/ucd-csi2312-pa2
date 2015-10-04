@@ -31,59 +31,69 @@ namespace Clustering {
     {
         NodePtr newNode = new Node;     // Create new Node
 
-        if (points != nullptr) {        // If head is not empty
-            NodePtr tempNode = points->next;    //Place next into tempNode
-            PointPtr tempPoint = points->data;  //Place points into tempPoint
+        if (points == nullptr) {        //If head is empty
+            points = newNode;           //Assign newNode to head
+            points->data = ptr;         //Assign ptr to head's data
+            points->next = nullptr;     //Assign head's next to NULL
+        }
+        else{                           //else
+            NodePtr tempNode;           //Create a temporary Node
+            PointPtr tempPoint;         //And a temporary Point
 
-            if (ptr != tempPoint) {     // If Point is not equal to the tempPoint insert into head
+            tempNode = points;          //Assign the head into temporary node
+            tempPoint = points->data;   //and assign the Points into temporary Point
 
-                for (int i = 0; i < ptr->getDim(); i++) {
-                    if (ptr->getValue(i) > tempPoint->getValue(i)) {    //If ptr is greater than tempPoint
-                        points = newNode;                               // Place newNode into points
-                        points->data = ptr;                             // Place ptr into points->data
-                        newNode->next = tempNode;                       // place tempNode into newNode->next
-                        newNode->data = tempPoint;                      // place tempPoint into newNode->data
-                        size++;
-                        break;
-                    }
-                }
+            points = newNode;           //Then assign the newNode into the head
+            points->data = ptr;         //and the ptr into the heads data
+            points->next = tempNode;    //and point the heads next to the tempNode
+        }
+        size++;                         //increase size
 
-//                NodePtr tempNode2 = tempNode->next;
-//                PointPtr tempPoint2 = tempNode->data;
+//        for(int seek = 0; seek < size; seek++) {
+//            for(int i = seek + 1; i < ptr->getDim(); i++) {
+//                if (points->data->getValue(i) < ptr->getValue(seek)) {
+//                    NodePtr tempNode;           //Create a temporary Node
+//                    PointPtr tempPoint;         //And a temporary Point
 //
-//                do {
-//                    if (ptr != tempPoint2) {
-//                        for (int i = 0; i < ptr->getDim(); i++) {
-//                            if (ptr->getValue(i) > tempPoint2->getValue(i)) {
-//                                tempNode->next = newNode;
-//                                tempNode->data = ptr;
-//                                newNode->next = tempNode2;
-//                                newNode->data = tempPoint2;
-//                                size++;
-//                                tempNode2 = nullptr;
-//                                break;
-//                            }
-//                        }
-//                    }
+//                    tempNode = points;          //Assign the head into temporary node
+//                    tempPoint = points->data;   //and assign the Points into temporary Point
+//
+//                    points = newNode;           //Then assign the newNode into the head
+//                    points->data = ptr;         //and the ptr into the heads data
+//                    points->next = tempNode;    //and point the heads next to the tempNode
 //                }
-//                while (tempNode2 != nullptr);
-            }
-        }
-        else
-        {
-            points = newNode;
-            points->data = ptr;
-            points->next = nullptr;
-            size++;
-        }
+//            }
+//        }
     }
 
     //Remove a point from Cluster
     const PointPtr &Cluster::remove(PointPtr const &ptr) {
-        if (points != nullptr) {
-            if(points->data == ptr){
-                points->data = NULL;
-                points = points->next;
+        if (points != nullptr) {                   //If list is not empty
+            NodePtr currentNode = points;
+            NodePtr trailNode = 0;
+
+            while (currentNode != nullptr){         //Traverses the list to find ptr
+                if(currentNode->data == ptr) {
+                    break;
+                }
+                else {
+                    trailNode = currentNode;
+                    currentNode = currentNode->next;
+                }
+            }
+
+            if(currentNode == nullptr){             //If end of list is reached
+                std::cout << "Not Found \n";        //output "Not Found"
+            }
+            else{                                   //Delete from head
+                if (points == currentNode) {
+                    points = points->next;
+                }
+                else {                              //Delete from beyond the head
+                    trailNode->next = currentNode->next;
+                }
+                delete currentNode;
+                size--;
             }
         }
 
@@ -96,15 +106,15 @@ namespace Clustering {
             NodePtr tempNodePtr = cluster.points;
             PointPtr tempPointPtr = cluster.points->data;
 
-            std::cout << *tempPointPtr << std::endl;
+            std::cout << *tempPointPtr ;
 
             while(tempNodePtr->next != nullptr) {
-                //tempNodePtr = tempNodePtr->next;
+                tempNodePtr = tempNodePtr->next;
                 tempPointPtr = tempNodePtr->data;
 
-                std::cout << *tempPointPtr << std::endl;
+                std::cout << *tempPointPtr ;
             }
-            std::cout << std::endl;
+
         }
         else {
             std::cout << "Cluster is empty" << std::endl;
@@ -112,4 +122,27 @@ namespace Clustering {
 
         return ostream;
     }
+
+    //Determines if two points share the same address
+    bool operator==(const Cluster &lhs, const Cluster &rhs) {
+        bool equal = false;
+
+        if (lhs.size == rhs.size) {
+            for(int i = 0; i < lhs.size; i++) {
+                if (lhs.points->data->getValue(i) == rhs.points->data->getValue(i)){
+                    equal = true;
+                }
+                else {
+                    equal = false;
+                }
+            }
+        }
+        return equal;
+    }
 }
+
+
+
+
+
+
