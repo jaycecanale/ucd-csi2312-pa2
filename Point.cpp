@@ -225,5 +225,14 @@ namespace Clustering {
         return greaterOrEqual;
     }
 }
+    //Output the dimensions in a Point
+    std::ostream &operator<<(std::ostream &ostream, const Point &point) {
+        for(int i = 0; i < point.dim; i++){
+            std::cout << point.getValue(i) << " ";
+        }
+        std::cout << std::endl;
 
+        return ostream;
+    }
+}
 
