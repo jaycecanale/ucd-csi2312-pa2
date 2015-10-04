@@ -65,6 +65,8 @@ namespace Clustering {
         friend bool operator<=(const Point &, const Point &); //Less than or equal to
 
         friend bool operator>=(const Point &, const Point &); //Greater than or equal to
+
+        friend std::ostream &operator<<(std::ostream &, const Point &); //Output the dimensions of a Point
     };
 }
 #endif // __point_h
