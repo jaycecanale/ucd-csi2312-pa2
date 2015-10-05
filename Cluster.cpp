@@ -36,18 +36,40 @@ namespace Clustering {
             points->data = ptr;         //Assign ptr to head's data
             points->next = nullptr;     //Assign head's next to NULL
         }
-        else{                           //else
-            NodePtr tempNode;           //Create a temporary Node
-            PointPtr tempPoint;         //And a temporary Point
+        else{
+            NodePtr tempNode;           //Create a temporary node
+            PointPtr tempPoint;         //and a temporary point
 
             tempNode = points;          //Assign the head into temporary node
-            tempPoint = points->data;   //and assign the Points into temporary Point
+            tempPoint = points->data;   //and assign the Points into temporary point
 
             points = newNode;           //Then assign the newNode into the head
             points->data = ptr;         //and the ptr into the heads data
             points->next = tempNode;    //and point the heads next to the tempNode
         }
         size++;                         //increase size
+
+        if(points->next != nullptr){
+            NodePtr currNode = points;
+            NodePtr tempNode;
+            PointPtr tempPoint;
+
+            while(currNode != nullptr){
+                if(currNode->data > currNode->next->data){
+                    break;
+                }
+                else{
+                    tempNode = currNode;
+                    tempPoint = currNode->data;
+
+                    currNode = currNode->next;
+                    currNode->data = currNode->next->data;
+
+                    currNode->next = tempNode;
+                    currNode->next->data = tempPoint;
+                }
+                currNode = currNode->next;
+            }
         }
     }
 
@@ -129,6 +151,7 @@ namespace Clustering {
         return equal;
     }
 
+    //Adds one Clusters points to another
     Cluster &Cluster::operator+=(const Cluster &rhs) {
         if (rhs.size > 0) {
             NodePtr tempNodePtr = rhs.points;
@@ -147,7 +170,7 @@ namespace Clustering {
             NodePtr thisNodePtr = points;
 
             while(thisNodePtr != nullptr) {
-                    if (thisNodePtr == rhsNodePtr) {
+                    if (thisNodePtr->data == rhsNodePtr->data) {
                         remove(thisNodePtr->data);
                     }
                 thisNodePtr = thisNodePtr->next;
@@ -155,5 +178,35 @@ namespace Clustering {
             }
         }
         return *this;
+    }
+
+    //Adds two Clusters Points together to create new Cluster
+    const Cluster operator+(const Cluster &lhs, const Cluster &rhs) {
+        Cluster sum;
+        NodePtr lhsNodePtr = lhs.points;
+        NodePtr rhsNodePtr = rhs.points;
+
+        while (lhsNodePtr != nullptr && rhsNodePtr != nullptr){         //Traverse both lists until we reach nullptr
+            sum.add(lhsNodePtr->data);                                  //Add lhsNodePtr data to Cluster
+            sum.add(rhsNodePtr->data);                                  //Add rhsNodePtr data to Cluster
+            lhsNodePtr = lhsNodePtr->next;                              //Move to next in lhsNodePtr
+            rhsNodePtr = rhsNodePtr->next;                              //Move to next in rhsNodePtr
+        }
+        return sum;
+    }
+
+    const Cluster operator-(const Cluster &lhs, const Cluster &rhs) {
+        Cluster difference;
+        NodePtr lhsNodePtr = lhs.points;
+        NodePtr rhsNodePtr = rhs.points;
+
+        while (lhsNodePtr != nullptr && rhsNodePtr != nullptr) {        //Traverse both lists until we reach nullptr
+            if (lhsNodePtr->data == rhsNodePtr->data){                              //If two Nodes match
+                difference.add(lhsNodePtr->data);                       //Add the node to the new Cluster
+            }
+            lhsNodePtr = lhsNodePtr->next;                              //Move to next in lhsNodePtr
+            rhsNodePtr = rhsNodePtr->next;                              //Move to next in rhsNodePtr
+        }
+        return difference;
     }
 }
