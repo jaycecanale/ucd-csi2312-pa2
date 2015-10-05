@@ -48,22 +48,7 @@ namespace Clustering {
             points->next = tempNode;    //and point the heads next to the tempNode
         }
         size++;                         //increase size
-
-//        for(int seek = 0; seek < size; seek++) {
-//            for(int i = seek + 1; i < ptr->getDim(); i++) {
-//                if (points->data->getValue(i) < ptr->getValue(seek)) {
-//                    NodePtr tempNode;           //Create a temporary Node
-//                    PointPtr tempPoint;         //And a temporary Point
-//
-//                    tempNode = points;          //Assign the head into temporary node
-//                    tempPoint = points->data;   //and assign the Points into temporary Point
-//
-//                    points = newNode;           //Then assign the newNode into the head
-//                    points->data = ptr;         //and the ptr into the heads data
-//                    points->next = tempNode;    //and point the heads next to the tempNode
-//                }
-//            }
-//        }
+        }
     }
 
     //Remove a point from Cluster
@@ -126,23 +111,49 @@ namespace Clustering {
     //Determines if two points share the same address
     bool operator==(const Cluster &lhs, const Cluster &rhs) {
         bool equal = false;
+        NodePtr lhsNodePtr = lhs.points;
+        NodePtr rhsNodePtr = rhs.points;
 
         if (lhs.size == rhs.size) {
-            for(int i = 0; i < lhs.size; i++) {
-                if (lhs.points->data->getValue(i) == rhs.points->data->getValue(i)){
-                    equal = true;
-                }
-                else {
-                    equal = false;
-                }
+            while(lhsNodePtr != nullptr) {
+                if (lhsNodePtr->data != rhsNodePtr->data) {
+                        equal = false;
+                    }
+                    else {
+                        equal = true;
+                    }
+                lhsNodePtr = lhsNodePtr->next;
+                rhsNodePtr = rhsNodePtr->next;
             }
         }
         return equal;
     }
+
+    Cluster &Cluster::operator+=(const Cluster &rhs) {
+        if (rhs.size > 0) {
+            NodePtr tempNodePtr = rhs.points;
+
+            while (tempNodePtr != nullptr){
+                this->add(tempNodePtr->data);
+                tempNodePtr = tempNodePtr->next;
+            }
+            return *this;
+        }
+    }
+
+    Cluster &Cluster::operator-=(const Cluster &rhs) {
+        if (rhs.size > 0) {
+            NodePtr rhsNodePtr = rhs.points;
+            NodePtr thisNodePtr = points;
+
+            while(thisNodePtr != nullptr) {
+                    if (thisNodePtr == rhsNodePtr) {
+                        remove(thisNodePtr->data);
+                    }
+                thisNodePtr = thisNodePtr->next;
+                rhsNodePtr = rhsNodePtr->next;
+            }
+        }
+        return *this;
+    }
 }
-
-
-
-
-
-
