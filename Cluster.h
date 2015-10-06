@@ -10,16 +10,16 @@
 namespace Clustering {
 
     typedef Point* PointPtr;
-    typedef struct Node* NodePtr;
+    typedef struct LNode* LNodePtr;
 
-    struct Node {
-        PointPtr data;
-        NodePtr next;
+    struct LNode {
+        PointPtr p;
+        LNodePtr next;
     };
 
     class Cluster {
         int size;
-        NodePtr points;
+        LNodePtr points;
 
     public:
         Cluster() : size(0), points(nullptr) {};
@@ -29,7 +29,7 @@ namespace Clustering {
         Cluster &operator=(const Cluster &);
         ~Cluster();
 
-        // Set functions: They allow calling c1.add(c2.remove(data));
+        // Set functions: They allow calling c1.add(c2.remove(p));
         void add(const PointPtr &);
         const PointPtr &remove(const PointPtr &);
 
