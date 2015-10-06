@@ -4,17 +4,17 @@ namespace Clustering {
 
     Point::Point(int initDim) {
         dim = initDim;
-        array = new double[dim]();
+        values = new double[dim]();
     }
 
 //Copy Constructor
     Point::Point(const Clustering::Point &point) {
         dim = point.dim;
 
-        array = new double[point.dim];
+        values = new double[point.dim];
 
         for (int i = 0; i < dim; i++) {
-            array[i] = point.array[i];
+            values[i] = point.values[i];
         }
     }
 
@@ -22,9 +22,9 @@ namespace Clustering {
     Point &Clustering::Point::operator=(const Clustering::Point &point) {
         if (&point != this) {
             dim = point.dim;
-            array = new double[point.dim];
+            values = new double[point.dim];
             for (int i = 0; i < dim; i++) {
-                array[i] = point.array[i];
+                values[i] = point.values[i];
             }
         }
 
@@ -33,8 +33,8 @@ namespace Clustering {
 
 //Destructor
     Point::~Point() {
-        delete[] array;
-        array = NULL;
+        delete[] values;
+        values = NULL;
     }
 
 // Mutator methods
@@ -44,7 +44,7 @@ namespace Clustering {
     }
 
     void Point::setValue(int index, double value) {
-        array[index] = value;
+        values[index] = value;
     }
 
 //Accessors
@@ -54,7 +54,7 @@ namespace Clustering {
     }
 
     double Point::getValue(int value) const {
-        return array[value];
+        return values[value];
     }
 
 //Functions
@@ -64,7 +64,7 @@ namespace Clustering {
         double something = 0;
 
         for (int i = 0; i < getDim(); i++) {
-            something += pow((point.array[i] - array[i]), 2);
+            something += pow((point.values[i] - values[i]), 2);
         }
 
         distance = sqrt(something);
@@ -77,7 +77,7 @@ namespace Clustering {
     //Multiply a Point by a given number
     Point &Point::operator*=(double num) {
         for (int i = 0; i < dim; i++) {
-            array[i] *= num;
+            values[i] *= num;
         }
         return *this;
     }
@@ -89,7 +89,7 @@ namespace Clustering {
         }
         else {
         for (int i = 0; i < dim; i++) {
-            array[i] /= num;
+            values[i] /= num;
         }
         }
         return *this;
@@ -101,7 +101,7 @@ namespace Clustering {
 // Adds one point's dimensions to a particular point
     Point &operator+=(Point &point, const Point &point1) {
         for (int i = 0; i < point.dim; i++) {
-            point.array[i] += point1.array[i];
+            point.values[i] += point1.values[i];
         }
         return point;
     }
@@ -110,7 +110,7 @@ namespace Clustering {
     Point &operator-=(Point &point, const Point &point1) {
 
         for (int i = 0; i < point.dim; i++) {
-            point.array[i] -= point1.array[i];
+            point.values[i] -= point1.values[i];
         }
         return point;
     }
@@ -121,7 +121,7 @@ namespace Clustering {
         Point sum(point.dim);
 
         for (int i = 0; i < point.dim; i++) {
-            sum.array[i] = point.array[i] + point1.array[i];
+            sum.values[i] = point.values[i] + point1.values[i];
         }
 
         return sum;
@@ -133,7 +133,7 @@ namespace Clustering {
         Point diff(point.dim);
 
         for (int i = 0; i < point.dim; i++) {
-            diff.array[i] = point.array[i] - point1.array[i];
+            diff.values[i] = point.values[i] - point1.values[i];
         }
 
         return diff;
@@ -145,7 +145,7 @@ namespace Clustering {
         int index = 0;
 
         while (index < point.dim)
-            if (point.array[index] == point1.array[index]) {
+            if (point.values[index] == point1.values[index]) {
                 equal = true;
                 index++;
             }
@@ -162,7 +162,7 @@ namespace Clustering {
         int index = 0;
 
         while (index < point.dim)
-            if (point.array[index] == point1.array[index]) {
+            if (point.values[index] == point1.values[index]) {
                 equal = false;
                 index++;
             }
@@ -178,7 +178,7 @@ namespace Clustering {
         bool lessThan = true;
 
         for (int i = 0; i < point.dim; i++) {
-            if (point.array[i] > point1.array[i]) {
+            if (point.values[i] > point1.values[i]) {
                 lessThan = false;
                 break;
             }
@@ -191,7 +191,7 @@ namespace Clustering {
         bool greaterThan = true;
 
         for (int i = 0; i < point.dim; i++) {
-            if (point.array[i] < point1.array[i]) {
+            if (point.values[i] < point1.values[i]) {
                 greaterThan = false;
                 break;
             }
@@ -204,7 +204,7 @@ namespace Clustering {
         bool lessOrEqual = true;
 
         for (int i = 0; i < point.dim; i++) {
-            if (point.array[i] >= point1.array[i]) {
+            if (point.values[i] >= point1.values[i]) {
                 lessOrEqual = false;
                 break;
             }
@@ -212,19 +212,19 @@ namespace Clustering {
         return lessOrEqual;
     }
 
-    //Determines whether a point if greater than or equal to a point
+    //Determines whether a point is greater than or equal to a point
     bool operator>=(const Point &point, const Point &point1) {
         bool greaterOrEqual = true;
 
         for (int i = 0; i < point.dim; i++) {
-            if (point.array[i] <= point1.array[i]) {
+            if (point.values[i] <= point1.values[i]) {
                 greaterOrEqual = false;
                 break;
             }
         }
         return greaterOrEqual;
     }
-}
+
     //Output the dimensions in a Point
     std::ostream &operator<<(std::ostream &ostream, const Point &point) {
         for(int i = 0; i < point.dim; i++){
@@ -235,4 +235,3 @@ namespace Clustering {
         return ostream;
     }
 }
-
