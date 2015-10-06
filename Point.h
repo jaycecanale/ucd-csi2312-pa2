@@ -13,7 +13,7 @@ namespace Clustering {
 
     private:
         int dim;
-        double *array;
+        double *values;
 
     public:
         Point(int);
